@@ -19,5 +19,8 @@
             </div>
         </div>
     </div>
+    <div id="vue">
+        <photo-gallery></photo-gallery>
+    </div>
 </div>
 @endsection

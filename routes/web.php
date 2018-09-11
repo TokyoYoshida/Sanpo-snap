@@ -11,12 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
+Route::get('/', 'TopController@index')->name('top');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/user/edit', 'UserEditController@index')->name('user_edit');
 Route::post('/user/edit/update', 'UserEditController@update');

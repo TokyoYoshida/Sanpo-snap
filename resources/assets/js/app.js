@@ -9,15 +9,20 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+import {VueMasonryPlugin} from 'vue-masonry';
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+Vue.use(VueMasonryPlugin);
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 Vue.component('file-uploader', require('./components/FileUploader.vue'));
+Vue.component('photo-gallery', require('./components/PhotoGallery.vue'));
 
 new Vue({
     el: '#vue'
 });
+
