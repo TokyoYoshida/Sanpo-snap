@@ -17,4 +17,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::resource('/photos', 'PhotoController', ['except' => ['create', 'edit']]);
+Route::resource('/photos', 'ApiPhotoController', ['except' => ['create', 'edit']]);
+Route::post('/photo_image', 'ApiPhotoController@imageUpload')->name('photo_image_upload');

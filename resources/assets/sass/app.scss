@@ -12,5 +12,21 @@
 .navbar-laravel {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+  .nav-item {
+      img {
+          padding-bottom: 3px;
+      }
+  }
 }
 
+.photo-edit {
+    .card {
+        height: 100%;
+    }
+    .col-md-6,.col-md-12 {
+        padding: 3px;
+    }
+    .search {
+        margin-bottom: 3px;
+    }
+}

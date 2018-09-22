@@ -44,6 +44,22 @@ class UserEditController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $user = User::find($id);
+        if($user === null){
+            abort(404);
+        }
+
+        return view('user_show', ['user' => $user]);
+    }
+
+    /**
      * Get a validator for an incoming registration request.
      *
      * @param  array  $data

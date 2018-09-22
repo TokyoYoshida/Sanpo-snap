@@ -41,7 +41,7 @@
                                 <form method="POST" action="{{ url('/user/edit/upload') }}" aria-label="{{ __('Icon') }}" enctype="multipart/form-data">
                                     @csrf
                                     <input type="hidden" class="form-control" name="id" value="{{ $user->id }}">
-                                    <file-uploader></file-uploader>
+                                    <file-simple-uploader></file-simple-uploader>
                                 </form>
                             </div>
                         </div>

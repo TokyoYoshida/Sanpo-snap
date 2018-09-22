@@ -16,7 +16,13 @@
 </style>
 
 <script>
+    import {VueMasonryPlugin} from 'vue-masonry';
+    Vue.use(VueMasonryPlugin);
+
     export default {
+        components: {
+            vueDropzone: require('vue2-dropzone')
+        },
         mounted() {
             axios
                 .get('/api/photos')
