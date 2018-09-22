@@ -78,7 +78,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'ja',
 
     /*
     |--------------------------------------------------------------------------
@@ -210,5 +210,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
     ],
+
+    'image_tmp_dir' => "/public/tmp",
 
 ];

@@ -45,6 +45,9 @@
                                 <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                             </li>
                         @else
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('photo_create') }}"><img src="/img/plus.png" width="20px">&nbsp;{{ __('Upload') }}</a>
+                            </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
@@ -54,7 +57,7 @@
                                     <a class="dropdown-item" href="{{ route('user_edit') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('profile-form').submit();">
-                                        {{ __('プロフィール編集') }}
+                                        {{ __('Profile') }}
                                     </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
