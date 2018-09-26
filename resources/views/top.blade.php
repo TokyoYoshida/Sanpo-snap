@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <div id="vue">
+    <div>
         <photo-gallery></photo-gallery>
     </div>
 </div>

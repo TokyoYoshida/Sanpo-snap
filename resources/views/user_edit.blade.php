@@ -32,7 +32,7 @@
                         <div class="form-group row">
                             <label for="icon" class="col-md-4 col-form-label d-flex align-items-center justify-content-end">{{ __('アイコン') }}</label>
 
-                            <div id="vue" class="col-md-6">
+                            <div class="col-md-6">
                                 @if ($user->icon_file)
                                     <p>
                                         <img src="{{ asset("storage/avatar/{$user->icon_file}") }}" alt="avatar" />

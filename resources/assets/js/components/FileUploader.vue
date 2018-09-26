@@ -26,9 +26,6 @@
                 filename: '',
             }
         },
-        mounted() {
-            console.log('Component mounted.')
-        },
         methods: {
             fileSelected: function(e) {
                 e.preventDefault();

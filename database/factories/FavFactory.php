@@ -13,11 +13,9 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(App\User::class, function (Faker $faker) {
+$factory->define(App\Fav::class, function (Faker $faker) {
     return [
-        'name' => "mytest",
-        'email' => "test@email.com",
-        'password' => password_hash('password', PASSWORD_DEFAULT), // secret
-        'remember_token' => str_random(10),
+        'user_id' => 1,
+        'photo_id' => 1,
     ];
 });

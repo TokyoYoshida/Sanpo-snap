@@ -22,7 +22,7 @@ class UserEditController extends Controller
     public function index()
     {
         $user = User::find(auth()->id());
-        if($user === null){
+        if ($user === null) {
             abort(404);
         }
 
@@ -32,7 +32,7 @@ class UserEditController extends Controller
     /**
      * Handle a registration request for the application.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
@@ -46,30 +46,39 @@ class UserEditController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $user = User::find($id);
-        if($user === null){
+        $target_user = User::find($id);
+        if ($target_user === null) {
             abort(404);
         }
 
-        return view('user_show', ['user' => $user]);
+        $follows = $target_user->follows->count();
+        $followers = $target_user->followers->count();
+
+        $is_following = false;
+        $auth_user = User::find(auth()->id());
+        if($auth_user !== null) {
+            $is_following = $target_user->followers->where('follower_id', $auth_user->id)->first() !== null;
+        }
+
+        return view('user_show', ['user' => $target_user, 'follows_count' => $follows, 'followers_count' => $followers, 'is_following' => $is_following]);
     }
 
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator($user, array $data)
     {
         return Validator::make($data, [
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,'.$user->id,
+            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
             'comment' => 'string|max:255'
         ]);
     }
@@ -77,7 +86,7 @@ class UserEditController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function store($user, Request $request)
@@ -91,7 +100,7 @@ class UserEditController extends Controller
     /**
      * upload a icon file
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function upload(Request $request)
@@ -114,13 +123,13 @@ class UserEditController extends Controller
         $filename = $request->file->store($this->icon_dir);
 
         $user = User::find(auth()->id());
-        if($user === null){
+        if ($user === null) {
             abort(404);
         }
         $old_filename = $user->icon_file;
         $user->icon_file = basename($filename);
         $user->save();
-        if(!empty($old_filename)) {
+        if (!empty($old_filename)) {
             Storage::delete("{$this->icon_dir}/{$old_filename}");
         }
         return redirect()->back()->with('success', __('アイコン画像を更新しました。'));

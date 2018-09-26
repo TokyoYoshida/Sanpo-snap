@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container photo-edit" id="vue">
+    <div class="container photo-edit">
         <form method="POST" action="{{ $photo ? url("photos/edit/update") : url('/photos') }}" aria-label="{{ __('Register') }}">
         <div class="row justify-content-center">
             <div class="col-md-12">
