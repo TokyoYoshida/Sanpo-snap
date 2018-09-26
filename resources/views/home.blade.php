@@ -19,7 +19,7 @@
             </div>
         </div>
     </div>
-    <div id="vue">
+    <div>
         <photo-gallery></photo-gallery>
     </div>
 </div>

@@ -2,7 +2,7 @@
     <div>
         <div v-masonry transition-duration="0.1s" item-selector=".item" column-width="270" fit-width="true">
             <div v-masonry-tile class="item" v-for="(item, index) in blocks">
-                <img :src=item.filename>
+                <img :src="'/storage/photo/' + item.filename">
             </div>
         </div>
     </div>
@@ -20,15 +20,28 @@
     Vue.use(VueMasonryPlugin);
 
     export default {
+        props: {
+            type: String, // 0 or undefined = all, 1 = user owned photos, 2 = user fav photos
+            user_id: String
+        },
         components: {
             vueDropzone: require('vue2-dropzone')
         },
         mounted() {
+            let url = '/api/photos';
+            switch (this.type) {
+                case "1":
+                    url = '/api/users/' + this.user_id + '/photos';
+                    break;
+                case "2":
+                    url = '/api/users/' + this.user_id + '/favs';
+                    break;
+            }
             axios
-                .get('/api/photos')
+                .get(url)
                 .then(response => {
                     this.blocks = response.data;
-                })
+                });
         },
         data: function() {
             return {

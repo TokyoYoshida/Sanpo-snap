@@ -63,7 +63,6 @@
                 if(this.file) {
                     this.$refs.myVueDropzone.removeFile(this.file);
                 }
-                console.log("add");
             },
             onError: function (file, message, xhr){
                 this.file = file;
@@ -73,7 +72,6 @@
                 this.filename = response;
                 this.file = file;
                 this.uploaded = 1;
-                console.log(this.filename);
             }
         }
     }

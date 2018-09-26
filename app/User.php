@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -30,5 +31,20 @@ class User extends Authenticatable
     public function photos()
     {
         return $this->hasMany('App\Photo');
+    }
+
+    public function followers()
+    {
+        return $this->hasMany('App\Follow' ,'followee_id');
+    }
+
+    public function follows()
+    {
+        return $this->hasMany('App\Follow' ,'follower_id');
+    }
+
+    public function favs()
+    {
+        return $this->hasMany('App\Fav');
     }
 }
