@@ -38,4 +38,83 @@ class ApiUserController extends Controller
 
         return response($photos);
     }
+
+    /**
+     * add fav photo to user
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function add_fav($id, Request $request)
+    {
+        $this->validate($request, [
+            'photo_id' => ['required']
+        ]);
+
+        $user = User::find(auth()->id());
+        if($user === null){
+            abort(404);
+        }
+
+        $photo = Photo::find($request->photo_id);
+        if($photo === null){
+            abort(404);
+        }
+
+        $this->store_fav($id, $request->photo_id);
+
+        return response($request->photo_id);
+    }
+
+    /**
+     * del fav from user
+     *
+     * @param $id
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
+    public function del_fav($id, Request $request)
+    {
+        $this->validate($request, [
+            'photo_id' => ['required']
+        ]);
+
+        $user = User::find(auth()->id());
+        if($user === null){
+            abort(404);
+        }
+
+        $photo = Photo::find($request->photo_id);
+        if($photo === null){
+            abort(404);
+        }
+
+        $this->delete_fav($id, $request->photo_id);
+
+        return response($request->photo_id);
+    }
+
+    /**
+     * store fav
+     *
+     * @param $id
+     * @param $photo_id
+     */
+    private function store_fav($id, $photo_id)
+    {
+        $fav = new Fav();
+        $fav->user_id = $id;
+        $fav->photo_id = $photo_id;
+        $fav->save();
+    }
+
+    /**
+     * delete fav
+     *
+     * @param $id
+     * @param $photo_id
+     */
+    private function delete_fav($id, $photo_id)
+    {
+        Fav::where('user_id', '=', $id)->where("photo_id", $photo_id)->delete();
+    }
 }

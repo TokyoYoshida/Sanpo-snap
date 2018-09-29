@@ -24,5 +24,8 @@ Route::get('/users/{id}/favs', 'ApiUserController@favs')->name('user_favs');
 Route::post('/photo_image', 'ApiPhotoController@imageUpload')->name('photo_image_upload');
 
 Route::middleware(['auth'])->group(function () {
-    Route::post('/users/{id}/followers', 'ApiFollowController@follow')->name('user_follow');
+    Route::post('/users/{id}/followers', 'ApiFollowController@follow_add')->name('user_follow_add');
+    Route::delete('/users/{id}/followers', 'ApiFollowController@follow_del')->name('user_follow_del');
+    Route::post('/users/{id}/favs', 'ApiUserController@add_fav')->name('user_add_fav');
+    Route::delete('/users/{id}/favs', 'ApiUserController@del_fav')->name('user_del_fav');
 });
