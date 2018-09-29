@@ -69,7 +69,17 @@ class PhotoController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::find(auth()->id());
+        $photo = Photo::find($id);
+        if($photo === null){
+            abort(404);
+        }
+        $is_faved = false;
+        if($user !== null) {
+            $is_faved = $user->favs()->where('photo_id', $photo->id)->first() != null;
+        }
+
+        return view('photo_show', ['user' => $user, 'photo' => $photo, 'is_faved' => $is_faved]);
     }
 
     /**

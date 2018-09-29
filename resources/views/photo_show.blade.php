@@ -25,18 +25,22 @@
         </div>
 
         <div class="row justify-content-center">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <div class="card border-0">
                     <div class="card-header border-0">{{ __('写真') }}</div>
-                    <div class="card-body">
-                        <image-uploader
-                            default-filename="{{  old('filename', $photo ? $photo->filename : '') }}"
-                            photo-uploaded="{{ session('success') ? '0' : old('photo_uploaded', '0') }}">
-                        </image-uploader>
+                    <div class="card-body text-center">
+                        <img src="/storage/photo/{{ $photo->filename  }}">
+                        <fav-panel
+                            :default-is-faved={{ json_encode($is_faved) }}
+                            user-id="{{ $user->id }}"
+                            photo-id="{{ $photo->id }}">
+                        </fav-panel>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-12">
                 <div class="card border-0">
                     <div class="card-header border-0">{{ __('写真の情報') }}</div>
 
@@ -49,28 +53,16 @@
                             <div class="form-group row">
                                 <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('タイトル') }}</label>
 
-                                <div class="col-md-6">
-                                    <input id="title" type="text" class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }}" name="title" value="{{ old('title', $photo ? $photo->title : '') }}" required autofocus>
-
-                                    @if ($errors->has('title'))
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('title') }}</strong>
-                                    </span>
-                                    @endif
+                                <div class="col-md-6 d-flex align-items-center">
+                                    {{ $photo->title }}
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <label for="comment" class="col-md-4 col-form-label text-md-right">{{ __('コメント') }}</label>
 
-                                <div class="col-md-6">
-                                    <input id="comment" type="comment" class="form-control{{ $errors->has('comment') ? ' is-invalid' : '' }}" name="comment" value="{{ old('comment', $photo ? $photo->comment : '') }}">
-
-                                    @if ($errors->has('comment'))
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('comment') }}</strong>
-                                    </span>
-                                    @endif
+                                <div class="col-md-6 d-flex align-items-center">
+                                    {{ $photo->comment }}
                                 </div>
                             </div>
 
@@ -84,24 +76,24 @@
                         <div class="card-header border-0">{{ __('場所') }}</div>
                         <div class="card-body">
                             @if ($photo || old('lat'))
-                               <map-pointer :use-search=true :default-maker="{lat: {{old('lat', $photo ? $photo->location_lat : '')}}, lng: {{old('lng', $photo ? $photo->location_lng : '')}} }">
+                               <map-pointer :default-maker="{lat: {{old('lat', $photo ? $photo->location_lat : '')}}, lng: {{old('lng', $photo ? $photo->location_lng : '')}} }">
                                 </map-pointer>
                             @else
-                                <map-pointer :use-search=true></map-pointer>
+                                <map-pointer></map-pointer>
                             @endif
                         </div>
                     </div>
                 </div>
             </div>
-        <div class="form-group row justify-content-center">
+        </form>
+        @if (Auth::user()->id == $user->id)
+        <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card border-0">
-                    <button type="submit" class="btn btn-primary">
-                        {{ __('保存') }}
-                    </button>
+                    <a class="btn btn-primary" href="{{ route('photo_edit', ['id' => $photo->id]) }}">編集する</a>
                 </div>
             </div>
         </div>
-        </form>
+        @endif
     </div>
 @endsection

@@ -39,6 +39,7 @@ Vue.component('photo-gallery', require('./components/PhotoGallery.vue'));
 Vue.component('image-uploader', require('./components/ImageUpLoader.vue'));
 Vue.component('map-pointer', require('./components/MapPointer.vue'));
 Vue.component('follow-panel', require('./components/FollowPanel.vue'));
+Vue.component('fav-panel', require('./components/FavPanel.vue'));
 
 new Vue({
     el: '#app'

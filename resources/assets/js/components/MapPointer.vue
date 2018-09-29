@@ -1,7 +1,7 @@
 <template>
     <div class="map-pointer row justify-content-start">
         <form onsubmit="return false;">
-            <div class="search input-group">
+            <div class="search input-group" v-if="useSearch">
                 <input type="text" v-model="searchAddressInput" title="test" class="form-control">
                 <input type="submit" v-on:click="searchLocation" class="btn btn-primary input-group-addon" value="検索">
             </div>
@@ -17,6 +17,7 @@
             @click="setMarker"
         >
             <GmapMarker
+                v-if="marker.lat"
                 :key="1"
                 :position="marker"
                 :clickable="true"
@@ -45,6 +46,7 @@
     export default {
         props: {
             defaultMaker: Object,
+            useSearch: Boolean,
         },
         mounted () {
             Vue.$gmapDefaultResizeBus.$emit('resize');
@@ -61,7 +63,7 @@
         },
         data: function() {
             return {
-                marker: {lat: "", lng: ""},
+                marker: {lat: null, lng: null},
                 currentLocation : { lat : 37.4507313, lng : 139.8372331 },
                 searchAddressInput: ''
             }

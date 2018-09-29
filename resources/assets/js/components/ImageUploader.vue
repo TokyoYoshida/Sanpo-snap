@@ -52,7 +52,7 @@
                     url: '/api/photo_image',
                     thumbnailWidth: 300,
                     maxFilesize: 2,
-                    headers: { "My-Awesome-Header": "header value" },
+                    headers: { 'X-CSRF-TOKEN': document.head.querySelector('meta[name="csrf-token"]').content},
                     maxFiles: 1,
                     clickable: true
                 }

@@ -2,7 +2,9 @@
     <div>
         <div v-masonry transition-duration="0.1s" item-selector=".item" column-width="270" fit-width="true">
             <div v-masonry-tile class="item" v-for="(item, index) in blocks">
-                <img :src="'/storage/photo/' + item.filename">
+                <a :href="'/photos/' + item.id">
+                    <img :src="'/storage/photo/' + item.filename">
+                </a>
             </div>
         </div>
     </div>

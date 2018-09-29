@@ -5,8 +5,13 @@
                 {{ followers }}
             </div>
             <div class="col-md-6 d-flex align-items-center">
-                <button type="button" class="btn btn-primary" @click="follow" :disabled="isFollowing">
-                    フォローする
+                <button type="button" class="btn btn-primary" @click="onClick" :disabled="userId === null">
+                    <div v-if="!isFollowing">
+                        フォローする
+                    </div>
+                    <div v-else>
+                        フォローを解除する
+                    </div>
                 </button>
             </div>
         </div>
@@ -34,14 +39,24 @@
             this.isFollowing = this.defaultIsFollowing == 1;
         },
         methods: {
-            follow: function(e) {
-                axios("/api/users/" + this.userId + "/followers", {
-                    method: 'post',
-                    withCredentials: true
-                }).then(response => {
-                    this.followers = response.data[0];
-                    this.isFollowing = true;
-                });
+            onClick: function(e) {
+                if(!this.isFollowing) {
+                    axios("/api/users/" + this.userId + "/followers", {
+                        method: 'post',
+                        withCredentials: true
+                    }).then(response => {
+                        this.followers = response.data[0];
+                        this.isFollowing = true;
+                    });
+                } else {
+                    axios("/api/users/" + this.userId + "/followers", {
+                        method: 'delete',
+                        withCredentials: true
+                    }).then(response => {
+                        this.followers = response.data[0];
+                        this.isFollowing = false;
+                    });
+                }
             }
         }
     }
