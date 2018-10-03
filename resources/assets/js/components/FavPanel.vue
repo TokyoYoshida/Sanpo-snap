@@ -22,8 +22,9 @@
     export default {
         props: {
             defaultIsFaved: Boolean,
-            photoId: String,
-            userId: String,
+            photoId: Number,
+            userId: Number,
+            isAuthed: Boolean,
         },
         data: function() {
             return {

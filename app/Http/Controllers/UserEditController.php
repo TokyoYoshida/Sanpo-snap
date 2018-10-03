@@ -65,7 +65,13 @@ class UserEditController extends Controller
             $is_following = $target_user->followers->where('follower_id', $auth_user->id)->first() !== null;
         }
 
-        return view('user_show', ['user' => $target_user, 'follows_count' => $follows, 'followers_count' => $followers, 'is_following' => $is_following]);
+        return view('user_show', [
+            'user' => $target_user,
+            'follows_count' => $follows,
+            'followers_count' => $followers,
+            'is_following' => $is_following,
+            'auth_user' => $auth_user,
+        ]);
     }
 
     /**

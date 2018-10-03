@@ -32,8 +32,8 @@
                         <img src="/storage/photo/{{ $photo->filename  }}">
                         <fav-panel
                             :default-is-faved={{ json_encode($is_faved) }}
-                            user-id="{{ $user->id }}"
-                            photo-id="{{ $photo->id }}">
+                            :user-id="{{ $user ? $user->id : json_encode(null)}}"
+                            :photo-id="{{ $photo->id }}">
                         </fav-panel>
                     </div>
                 </div>
@@ -47,7 +47,6 @@
                     <div class="card-body">
                             @csrf
 
-                            <input type="hidden" class="form-control" name="user_id" value="{{ $user->id }}">
                             <input type="hidden" class="form-control" name="photo_id" value="{{ $photo ? $photo->id : (session('photo_id') ? session('photo_id') : '')}}">
 
                             <div class="form-group row">
@@ -86,7 +85,7 @@
                 </div>
             </div>
         </form>
-        @if (Auth::user()->id == $user->id)
+        @if ($user ? Auth::user()->id == $user->id : false)
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card border-0">
