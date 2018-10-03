@@ -43,7 +43,9 @@
                         <label for="comment" class="col-md-4 col-form-label text-md-right">{{ __('フォロー数') }}</label>
 
                         <div class="col-md-6 d-flex align-items-center">
-                            {{ $follows_count }}
+                            <a href={{ route('follows_show', $user->id) }}>
+                                {{ $follows_count }}
+                            </a>
                         </div>
                     </div>
 
@@ -51,11 +53,12 @@
                         <label for="comment" class="col-md-4 col-form-label text-md-right">{{ __('フォロワー数') }}</label>
 
                         <div class="col-md-6 d-flex align-items-center">
-                            {{--{{ $followers_count }}--}}
                             <follow-panel
                                 :default-followers={{ $followers_count }}
-                                user-id="{{ $user->id }}"
-                                :default-is-following={{ json_encode($is_following) }}>
+                                :user-id="{{ $user->id }}"
+                                :is-following={{ json_encode($is_following) }}
+                                :button-type={{ ($auth_user == null || $auth_user->id == $user->id) ? 0 : ($is_following ?  2 : 1)}}
+                            >
                             </follow-panel>
                         </div>
                     </div>

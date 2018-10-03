@@ -6,13 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Follow extends Model
 {
-    public function folowee_user()
+    public function followee_user()
     {
-        return $this->belongsTo('App\User', 'folowee_id');
+        return $this->belongsTo('App\User', 'followee_id');
     }
 
-    public function folower_user()
+    public function follower_user()
     {
-        return $this->belongsTo('App\User', 'folower_id');
+        return $this->belongsTo('App\User', 'follower_id');
     }
 }

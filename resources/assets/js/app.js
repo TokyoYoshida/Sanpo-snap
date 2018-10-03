@@ -40,6 +40,7 @@ Vue.component('image-uploader', require('./components/ImageUpLoader.vue'));
 Vue.component('map-pointer', require('./components/MapPointer.vue'));
 Vue.component('follow-panel', require('./components/FollowPanel.vue'));
 Vue.component('fav-panel', require('./components/FavPanel.vue'));
+Vue.component('user-panel', require('./components/UserPanel.vue'));
 
 new Vue({
     el: '#app'

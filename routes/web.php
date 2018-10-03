@@ -24,3 +24,5 @@ Route::get('/photos/{id}', 'PhotoController@show')->name('photo_show');
 Route::post('/photos', 'PhotoController@store')->name('photo_store');
 Route::get('/photos/edit/{id}', 'PhotoController@edit')->name('photo_edit');
 Route::post('/photos/edit/update', 'PhotoController@update')->name('photo_update');
+Route::get('/user/{id}/follows', 'FollowController@follows')->name('follows_show');
+Route::get('/user/{id}/followers', 'FollowController@follower')->name('follower_show');
