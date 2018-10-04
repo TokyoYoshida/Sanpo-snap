@@ -18,6 +18,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/user/edit', 'UserEditController@index')->name('user_edit');
 Route::post('/user/edit/update', 'UserEditController@update');
 Route::post('/user/edit/upload', 'UserEditController@upload');
+Route::get('/user/password_change', 'PasswordChangeController@show')->name('password_change_show');
+Route::post('/user/password_change', 'PasswordChangeController@update')->name('password_change_update');
 Route::get('/user/{id}', 'UserEditController@show')->name('user_show');
 Route::get('/photos/create', 'PhotoController@create')->name('photo_create');
 Route::get('/photos/{id}', 'PhotoController@show')->name('photo_show');
