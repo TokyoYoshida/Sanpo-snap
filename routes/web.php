@@ -28,3 +28,5 @@ Route::get('/photos/edit/{id}', 'PhotoController@edit')->name('photo_edit');
 Route::post('/photos/edit/update', 'PhotoController@update')->name('photo_update');
 Route::get('/user/{id}/follows', 'FollowController@follows')->name('follows_show');
 Route::get('/user/{id}/followers', 'FollowController@follower')->name('follower_show');
+Route::get('login/{provider}',          'Auth\SocialAccountController@redirectToProvider');
+Route::get('login/{provider}/callback', 'Auth\SocialAccountController@handleProviderCallback');
