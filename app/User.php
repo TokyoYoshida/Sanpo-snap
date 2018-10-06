@@ -47,4 +47,8 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Fav');
     }
+
+    public function accounts(){
+        return $this->hasMany('App\LinkedSocialAccount');
+    }
 }
