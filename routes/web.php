@@ -15,6 +15,9 @@ Auth::routes();
 
 Route::get('/', 'TopController@index')->name('top');
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/user/resign', 'ResignController@show')->name('resign_show');
+Route::post('/user/resign', 'ResignController@update')->name('resign_update');
+Route::get('/user/resign_complete', 'ResignController@complete')->name('resign_complete_show');
 Route::get('/user/edit', 'UserEditController@index')->name('user_edit');
 Route::post('/user/edit/update', 'UserEditController@update');
 Route::post('/user/edit/upload', 'UserEditController@upload');
