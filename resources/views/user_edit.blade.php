@@ -30,7 +30,7 @@
 
                     <div class="card-body">
                         <div class="form-group row">
-                            <label for="icon" class="col-md-4 col-form-label d-flex align-items-center justify-content-end">{{ __('アイコン') }}</label>
+                            <label for="icon" class="col-md-4 col-form-label text-md-right">{{ __('アイコン') }}</label>
 
                             <div class="col-md-6">
                                 @if ($user->icon_file)
@@ -93,12 +93,11 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row mb-0">
-                                <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn btn-primary">
-                                        {{ __('保存') }}
-                                    </button>
-                                </div>
+
+                            <div class="row justify-content-center">
+                                <button type="submit" class="btn btn-primary">
+                                    {{ __('保存') }}
+                                </button>
                             </div>
                         </form>
                     </div>

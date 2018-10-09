@@ -1,18 +1,16 @@
 <template>
     <div>
-        <div class="row justify-content-center">
-            <div class="col-md-6 d-flex align-items-center">
-                {{ followers }}
-            </div>
-            <div class="col-md-6 d-flex justify-content-end">
-                <follow-button
-                    :default-is-following="isFollowing"
-                    :user-id="userId"
-                    :button-type="buttonType"
-                    @change-event="onChenge"
-                >
-                </follow-button>
-            </div>
+        <div class="d-inline-block">
+            {{ followers }}
+        </div>
+        <div class="d-inline-block ml-4">
+            <follow-button
+                :default-is-following="isFollowing"
+                :user-id="userId"
+                :button-type="buttonType"
+                @change-event="onChenge"
+            >
+            </follow-button>
         </div>
     </div>
 </template>

@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-8 col-xs-12">
             <div class="card">
                 <div class="card-header">{{ __('新規登録') }}</div>
 
@@ -61,12 +61,10 @@
                             </div>
                         </div>
 
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-5">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('登録') }}
-                                </button>
-                            </div>
+                        <div class="row justify-content-center">
+                            <button type="submit" class="btn btn-primary">
+                                {{ __('登録') }}
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -74,9 +72,7 @@
         </div>
     </div>
     <div class="row justify-content-center mt-3">
-        <div class="col-md-8 offset-md-6">
-            <a href="/login/github" class="btn btn-secondary">Githubで登録</a>
-        </div>
+        <a href="/login/github" class="btn btn-secondary">Githubで登録</a>
     </div>
 </div>
 @endsection
