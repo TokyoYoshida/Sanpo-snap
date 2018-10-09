@@ -26,7 +26,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">{{ __('プロフィール') }}</div>
+                    <div class="card-header">{{ __('プロフィール編集') }}</div>
 
                     <div class="card-body">
                         <div class="form-group row">
