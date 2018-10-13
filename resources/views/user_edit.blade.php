@@ -29,27 +29,24 @@
                     <div class="card-header">{{ __('プロフィール編集') }}</div>
 
                     <div class="card-body">
-                        <div class="form-group row">
-                            <label for="icon" class="col-md-4 col-form-label text-md-right">{{ __('アイコン') }}</label>
-
-                            <div class="col-md-6">
-                                @if ($user->icon_file)
-                                    <p>
-                                        <img src="{{ asset("storage/avatar/{$user->icon_file}") }}" alt="avatar" />
-                                    </p>
-                                @endif
-                                <form method="POST" action="{{ url('/user/edit/upload') }}" aria-label="{{ __('Icon') }}" enctype="multipart/form-data">
-                                    @csrf
-                                    <input type="hidden" class="form-control" name="id" value="{{ $user->id }}">
-                                    <file-simple-uploader></file-simple-uploader>
-                                </form>
-                            </div>
-                        </div>
-
                         <form method="POST" action="{{ url('/user/edit/update') }}" aria-label="{{ __('Register') }}">
                             @csrf
 
                             <input type="hidden" class="form-control" name="id" value="{{ $user->id }}">
+
+                            <div class="form-group row">
+                                <label for="icon" class="col-md-4 col-form-label text-md-right">{{ __('アイコン') }}</label>
+
+                                <div class="col-md-6">
+                                    <image-uploader
+                                        default-filename="{{  old('image_filename', $user->icon_file) }}"
+                                        image-uploaded="{{ session('success') ? '0' : old('image_uploaded', '0') }}"
+                                        image-dir="{{ $image_dir }}"
+                                        :add-remove-link=true
+                                    >
+                                    </image-uploader>
+                                </div>
+                            </div>
 
                             <div class="form-group row">
                                 <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('ユーザーネーム') }}</label>
@@ -98,6 +95,11 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('保存') }}
                                 </button>
+                            </div>
+                            <div class="row justify-content-center mt-2">
+                                <a href={{ route('resign_show') }} class="btn btn-link">
+                                {{ __('>> 退会はこちらから') }}
+                                </a>
                             </div>
                         </form>
                     </div>

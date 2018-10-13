@@ -30,8 +30,11 @@
                     <div class="card-header border-0">{{ __('写真') }}</div>
                     <div class="card-body">
                         <image-uploader
-                            default-filename="{{  old('filename', $photo ? $photo->filename : '') }}"
-                            photo-uploaded="{{ session('success') ? '0' : old('photo_uploaded', '0') }}">
+                            default-filename="{{  old('image_filename', $photo ? $photo->filename : '') }}"
+                            image-uploaded="{{ session('success') ? '0' : old('image_uploaded', '0') }}"
+                            image-dir="{{ $image_dir }}"
+                            :add-remove-link=false
+                        >
                         </image-uploader>
                     </div>
                 </div>

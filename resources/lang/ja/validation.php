@@ -148,6 +148,6 @@ return [
         'name' => 'ユーザー名',
         'lat' => '場所',
         'comment' => "コメント",
-        'filename' => "写真",
+        'image_filename' => "画像",
     ],
 ];
