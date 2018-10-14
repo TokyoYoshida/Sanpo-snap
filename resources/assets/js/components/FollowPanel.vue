@@ -1,18 +1,18 @@
 <template>
     <div>
-        <div class="row justify-content-center">
-            <div class="col-md-6 d-flex align-items-center">
+        <div class="d-inline-block">
+            <a :href="follower_url">
                 {{ followers }}
-            </div>
-            <div class="col-md-6 d-flex justify-content-end">
-                <follow-button
-                    :default-is-following="isFollowing"
-                    :user-id="userId"
-                    :button-type="buttonType"
-                    @change-event="onChenge"
-                >
-                </follow-button>
-            </div>
+            </a>
+        </div>
+        <div class="d-inline-block ml-4">
+            <follow-button
+                :default-is-following="isFollowing"
+                :user-id="userId"
+                :button-type="buttonType"
+                @change-event="onChenge"
+            >
+            </follow-button>
         </div>
     </div>
 </template>
@@ -42,6 +42,11 @@
         methods: {
             onChenge: function(followers) {
                 this.followers = followers;
+            }
+        },
+        computed: {
+            follower_url: function(){
+                return "/users/" + this.userId + "/followers";
             }
         }
     }

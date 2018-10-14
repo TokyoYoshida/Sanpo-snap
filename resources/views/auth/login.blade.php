@@ -69,7 +69,10 @@
     </div>
     <div class="row justify-content-center mt-3">
         <div class="col-md-8 offset-md-5">
-            <a href="/login/github" class="btn btn-secondary">Log in with Github</a>
+            <a href="/login/github" class="btn btn-secondary">
+                <span class="fa fa-github fa-lg" aria-hidden="true"></span>
+                <span class="ml-2">Githubでログイン</span>
+            </a>
         </div>
     </div>
 </div>

@@ -40,7 +40,12 @@ class PhotoController extends Controller
 
         $upload_dir = "/storage/{$this->photo_dir}";
 
-        return view('photo_edit', ['user' => $user, 'photo' => null]);
+        return view('photo_edit', [
+                'user' => $user,
+                'photo' => null,
+                'image_dir' => '/storage/' . $this->photo_dir . '/',
+            ]
+        );
     }
 
     /**
@@ -69,17 +74,27 @@ class PhotoController extends Controller
      */
     public function show($id)
     {
-        $user = User::find(auth()->id());
+        $auth_user = User::find(auth()->id());
         $photo = Photo::find($id);
+        $photo_user = $photo->user()->first();
         if($photo === null){
             abort(404);
         }
         $is_faved = false;
-        if($user !== null) {
-            $is_faved = $user->favs()->where('photo_id', $photo->id)->first() != null;
+        $is_following = false;
+        if($auth_user !== null) {
+            $is_faved = $auth_user->favs()->where('photo_id', $photo->id)->first() != null;
+            $is_following = $photo_user->followers->where('follower_id', $auth_user->id)->first() !== null;
         }
 
-        return view('photo_show', ['user' => $user, 'photo' => $photo, 'is_faved' => $is_faved]);
+        return view('photo_show', [
+                'auth_user' => $auth_user,
+                'photo' => $photo,
+                'photo_user' => $photo_user,
+                'is_faved' => $is_faved,
+                'is_following' => $is_following
+            ]
+        );
     }
 
     /**
@@ -99,7 +114,12 @@ class PhotoController extends Controller
             abort(404);
         }
 
-        return view('photo_edit', ['user' => $user, 'photo' => $photo]);
+        return view('photo_edit', [
+                'user' => $user,
+                'photo' => $photo,
+                'image_dir' => '/storage/' . $this->photo_dir . '/',
+            ]
+        );
     }
 
     /**
@@ -140,7 +160,7 @@ class PhotoController extends Controller
         return Validator::make($data, [
             'title' => 'required|string|max:255',
             'comment' => 'string|max:255|nullable',
-            'filename' => 'required',
+            'image_filename' => 'required',
             'lat' => 'required'
         ]);
     }
@@ -153,10 +173,10 @@ class PhotoController extends Controller
      */
     protected function save($user_id, $photo, Request $request)
     {
-        if($request->photo_uploaded === "1"){
+        if($request->image_uploaded === "1"){
             $tmp_dir = config('app.image_tmp_dir');
-            Storage::move("{$tmp_dir}/{$request->filename}", "public/{$this->photo_dir}/{$request->filename}");
-            $photo->filename = $request->filename;
+            Storage::move("{$tmp_dir}/{$request->image_filename}", "public/{$this->photo_dir}/{$request->image_filename}");
+            $photo->filename = $request->image_filename;
         }
 
         $photo->user_id = $user_id;

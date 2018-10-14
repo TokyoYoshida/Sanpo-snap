@@ -41,6 +41,7 @@ Vue.component('map-pointer', require('./components/MapPointer.vue'));
 Vue.component('follow-panel', require('./components/FollowPanel.vue'));
 Vue.component('fav-panel', require('./components/FavPanel.vue'));
 Vue.component('user-panel', require('./components/UserPanel.vue'));
+Vue.component('home-panel', require('./components/HomePanel.vue'));
 
 new Vue({
     el: '#app'

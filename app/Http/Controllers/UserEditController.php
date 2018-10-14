@@ -12,21 +12,26 @@ class UserEditController extends Controller
     /**
      * @var string icon store directory
      */
-    private $icon_dir = 'public/avatar';
+    private $icon_dir = 'avatar';
 
     /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index() {
         $user = User::find(auth()->id());
         if ($user === null) {
             abort(404);
+
+
         }
 
-        return view('user_edit', ['user' => $user]);
+        return view('user_edit', [
+                'user' => $user,
+                'image_dir' => '/storage/' . $this->icon_dir . '/',
+            ]
+        );
     }
 
     /**
@@ -35,12 +40,11 @@ class UserEditController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
-    {
+    public function update(Request $request) {
         $user = User::find($request->id);
         $this->validator($user, $request->all())->validate();
         $this->store($user, $request);
-        return redirect()->back()->with('success', __('プロフィールを更新しました。'));
+        return redirect()->back()->withInput()->with('success', __('プロフィールを更新しました。'));
     }
 
     /**
@@ -49,8 +53,7 @@ class UserEditController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id) {
         $target_user = User::find($id);
         if ($target_user === null) {
             abort(404);
@@ -61,7 +64,7 @@ class UserEditController extends Controller
 
         $is_following = false;
         $auth_user = User::find(auth()->id());
-        if($auth_user !== null) {
+        if ($auth_user !== null) {
             $is_following = $target_user->followers->where('follower_id', $auth_user->id)->first() !== null;
         }
 
@@ -80,12 +83,11 @@ class UserEditController extends Controller
      * @param  array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator($user, array $data)
-    {
+    protected function validator($user, array $data) {
         return Validator::make($data, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
-            'comment' => 'string|max:255'
+            'comment' => 'string|max:255|nullable',
         ]);
     }
 
@@ -95,8 +97,20 @@ class UserEditController extends Controller
      * @param  array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function store($user, Request $request)
-    {
+    protected function store($user, Request $request) {
+        // update avator image
+        if ($request->image_uploaded === "1") {
+            if ($user->icon_file !== null) {
+                Storage::delete($this->build_image_path($user->icon_file));
+            }
+            $tmp_dir = config('app.image_tmp_dir');
+            Storage::move("{$tmp_dir}/{$request->image_filename}", $this->build_image_path($request->image_filename));
+            $user->icon_file = $request->image_filename;
+        } else if ($request->image_filename !== $user->icon_file) { // remove image
+            Storage::delete($this->build_image_path($user->icon_file));
+            $user->icon_file = null;
+        }
+
         $user->name = $request->name;
         $user->email = $request->email;
         $user->comment = $request->comment;
@@ -104,40 +118,9 @@ class UserEditController extends Controller
     }
 
     /**
-     * upload a icon file
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @param $filename
      */
-    public function upload(Request $request)
-    {
-        $this->validate($request, [
-            'file' => [
-                // 必須
-                'required',
-                // アップロードされたファイルであること
-                'file',
-                // 画像ファイルであること
-                'image',
-                // MIMEタイプを指定
-                'mimes:jpeg,png',
-                // 最小縦横120px 最大縦横400px
-                'dimensions:min_width=120,min_height=120,max_width=400,max_height=400',
-            ]
-        ]);
-
-        $filename = $request->file->store($this->icon_dir);
-
-        $user = User::find(auth()->id());
-        if ($user === null) {
-            abort(404);
-        }
-        $old_filename = $user->icon_file;
-        $user->icon_file = basename($filename);
-        $user->save();
-        if (!empty($old_filename)) {
-            Storage::delete("{$this->icon_dir}/{$old_filename}");
-        }
-        return redirect()->back()->with('success', __('アイコン画像を更新しました。'));
+    private function build_image_path($filename) {
+        return "public/{$this->icon_dir}/{$filename}";
     }
 }

@@ -5,11 +5,11 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">{{ __('Profile') }}</div>
+                    <div class="card-header">{{ __('プロフィール') }}</div>
 
                     <div class="card-body">
                         <div class="form-group row">
-                            <label for="icon" class="col-md-4 col-form-label d-flex align-items-center justify-content-end">{{ __('アイコン') }}</label>
+                            <label for="icon" class="col-md-4 col-form-label text-md-right">{{ __('アイコン') }}</label>
 
                             <div class="col-md-6">
                                 <img src="{{ asset("storage/avatar/{$user->icon_file}") }}" alt="avatar" />
@@ -39,27 +39,29 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">{{ __('Follow') }}</div>
-                    <div class="form-group row">
-                        <label for="comment" class="col-md-4 col-form-label text-md-right">{{ __('フォロー数') }}</label>
+                    <div class="card-body">
+                        <div class="form-group row">
+                            <label for="comment" class="col-md-4 col-form-label text-md-right">{{ __('フォロー数') }}</label>
 
-                        <div class="col-md-6 d-flex align-items-center">
-                            <a href={{ route('follows_show', $user->id) }}>
-                                {{ $follows_count }}
-                            </a>
+                            <div class="col-md-6 d-flex align-items-center">
+                                <a href={{ route('follows_show', $user->id) }}>
+                                    {{ $follows_count }}
+                                </a>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-group row">
-                        <label for="comment" class="col-md-4 col-form-label text-md-right">{{ __('フォロワー数') }}</label>
+                        <div class="form-group row">
+                            <label for="comment" class="col-md-4 col-form-label text-md-right">{{ __('フォロワー数') }}</label>
 
-                        <div class="col-md-6 d-flex align-items-center">
-                            <follow-panel
-                                :default-followers={{ $followers_count }}
-                                :user-id="{{ $user->id }}"
-                                :is-following={{ json_encode($is_following) }}
-                                :button-type={{ ($auth_user == null || $auth_user->id == $user->id) ? 0 : ($is_following ?  2 : 1)}}
-                            >
-                            </follow-panel>
+                            <div class="col-md-6 d-flex align-items-center">
+                                <follow-panel
+                                    :default-followers={{ $followers_count }}
+                                    :user-id="{{ $user->id }}"
+                                    :is-following={{ json_encode($is_following) }}
+                                    :button-type={{ ($auth_user == null || $auth_user->id == $user->id) ? 0 : ($is_following ?  2 : 1)}}
+                                >
+                                </follow-panel>
+                            </div>
                         </div>
                     </div>
                 </div>

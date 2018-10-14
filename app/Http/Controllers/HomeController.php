@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
+use App\Follow;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {

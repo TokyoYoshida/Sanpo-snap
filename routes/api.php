@@ -20,8 +20,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/photos', 'ApiPhotoController@index')->name('photo_index');
 Route::get('/users/{id}/photos', 'ApiUserController@photos')->name('user_photos');
 Route::get('/users/{id}/favs', 'ApiUserController@favs')->name('user_favs');
+Route::get('/users/{id}/timeline', 'ApiUserController@timeline')->name('user_timeline');
 
-Route::post('/photo_image', 'ApiPhotoController@imageUpload')->name('photo_image_upload');
+Route::post('/image', 'ApiImageController@imageUpload')->name('image_upload');
 
 Route::middleware(['auth'])->group(function () {
     Route::post('/users/{id}/followers', 'ApiFollowController@follow_add')->name('user_follow_add');

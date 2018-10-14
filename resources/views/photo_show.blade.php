@@ -32,7 +32,7 @@
                         <img src="/storage/photo/{{ $photo->filename  }}">
                         <fav-panel
                             :default-is-faved={{ json_encode($is_faved) }}
-                            :user-id="{{ $user ? $user->id : json_encode(null)}}"
+                            :user-id="{{ $auth_user ? $auth_user->id : json_encode(null)}}"
                             :photo-id="{{ $photo->id }}">
                         </fav-panel>
                     </div>
@@ -48,6 +48,21 @@
                             @csrf
 
                             <input type="hidden" class="form-control" name="photo_id" value="{{ $photo ? $photo->id : (session('photo_id') ? session('photo_id') : '')}}">
+
+                            <div class="form-group row">
+                                <label for="user" class="col-md-4 col-form-label text-md-right">{{ __('ユーザー') }}</label>
+
+                                <div class="col-md-7 text-left">
+                                    <user-panel
+                                        :id="{{$photo_user->id}}"
+                                        name="{{$photo_user->name}}"
+                                        icon-url="{{ asset("storage/avatar/{$photo_user->icon_file}") }}"
+                                        :is-following={{ json_encode($is_following != null)}}
+                                        :button-type={{ ($auth_user == null || $auth_user->id == $photo_user->id) ? 0 : ($is_following != null ?  2 : 1)}}
+                                    >
+                                    </user-panel>
+                                </div>
+                            </div>
 
                             <div class="form-group row">
                                 <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('タイトル') }}</label>
@@ -85,7 +100,7 @@
                 </div>
             </div>
         </form>
-        @if ($user ? Auth::user()->id == $user->id : false)
+        @if (($photo_user && Auth::user()) ? Auth::user()->id == $photo_user->id : false)
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card border-0">
