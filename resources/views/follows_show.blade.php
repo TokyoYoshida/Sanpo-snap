@@ -6,7 +6,7 @@
             <div class="col-md-12">
                 <div class="card border-0">
                     <div class="card-header border-0">{{ __('フォロー中のユーザー') }}</div>
-                    <div class="card-body">
+                    <div class="card-body mx-auto">
                         @foreach ($follows as $user)
                             <user-panel
                                 :id="{{$user->id}}"

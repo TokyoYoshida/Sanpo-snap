@@ -7,6 +7,7 @@ use App\User;
 use App\Fav;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
 
 class ApiUserController extends Controller
 {
@@ -35,6 +36,24 @@ class ApiUserController extends Controller
         foreach ($favs as $fav) {
             $photos[]= $fav->photo;
         }
+
+        return response($photos);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function timeline($id)
+    {
+        $photos = DB::table('follows')
+            ->select('photos.*')
+            ->join('photos', 'follows.followee_id', '=', 'photos.user_id')
+            ->where('follows.follower_id', '=', $id)
+            ->orderBy('photos.created_at', 'desc')
+            ->take(10)
+            ->get();
 
         return response($photos);
     }

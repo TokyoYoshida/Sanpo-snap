@@ -2,11 +2,11 @@
 
 @section('content')
     <div class="container">
-        <div class="row justify-content-center">
+        <div class="row d-flex justify-content-center">
             <div class="col-md-12">
                 <div class="card border-0">
                     <div class="card-header border-0">{{ __('フォローされているユーザー') }}</div>
-                    <div class="card-body">
+                    <div class="card-body mx-auto">
                         @foreach ($follows as $user)
                             <user-panel
                                 :id="{{$user->id}}"

@@ -1,11 +1,11 @@
 <template>
-    <button type="button" class="btn btn-primary" @click="onClick" :disabled="buttonType == 0" v-bind:style="{display : displayType}">
-        <div v-if="!isFollowing">
+    <button type="button" class="btn btn-primary d-inline" @click="onClick" :disabled="buttonType == 0" v-bind:style="{display : displayType}">
+        <span v-if="!isFollowing">
             フォローする
-        </div>
-        <div v-else>
+        </span>
+        <span v-else>
             フォローを解除する
-        </div>
+        </span>
     </button>
 </template>
 

@@ -1,7 +1,9 @@
 <template>
     <div>
         <div class="d-inline-block">
-            {{ followers }}
+            <a :href="follower_url">
+                {{ followers }}
+            </a>
         </div>
         <div class="d-inline-block ml-4">
             <follow-button
@@ -40,6 +42,11 @@
         methods: {
             onChenge: function(followers) {
                 this.followers = followers;
+            }
+        },
+        computed: {
+            follower_url: function(){
+                return "/users/" + this.userId + "/followers";
             }
         }
     }

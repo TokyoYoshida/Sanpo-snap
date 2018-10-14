@@ -29,7 +29,7 @@
                     <div class="card-header">{{ __('プロフィール編集') }}</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ url('/user/edit/update') }}" aria-label="{{ __('Register') }}">
+                        <form method="POST" action="{{ url('/users/edit/update') }}" aria-label="{{ __('Register') }}">
                             @csrf
 
                             <input type="hidden" class="form-control" name="id" value="{{ $user->id }}">
