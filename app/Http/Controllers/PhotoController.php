@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use App\User;
 use App\Photo;
+use App\Lib\Image;
 
 
 class PhotoController extends Controller
@@ -157,12 +158,20 @@ class PhotoController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
+        $validator = Validator::make($data, [
             'title' => 'required|string|max:255',
             'comment' => 'string|max:255|nullable',
             'image_filename' => 'required',
             'lat' => 'required'
         ]);
+
+//        $validator->after(function ($validator) use ($data) {
+//            if( !hasExifImage($this->build_tmp_path($request->image_filename))) {
+//                $validator->errors()->add('image_filename', '位置情報がついていません。位置情報のある画像を使用してください。');
+//            }
+//        });
+
+        return $validator;
     }
 
     /**
@@ -174,8 +183,11 @@ class PhotoController extends Controller
     protected function save($user_id, $photo, Request $request)
     {
         if($request->image_uploaded === "1"){
-            $tmp_dir = config('app.image_tmp_dir');
-            Storage::move("{$tmp_dir}/{$request->image_filename}", "public/{$this->photo_dir}/{$request->image_filename}");
+            if ($photo->filename !== null) { // remove old image if exist
+                Storage::delete($this->build_image_path($photo->filename));
+            }
+
+            Storage::move($this->build_tmp_path($request->image_filename), $this->build_image_path($request->image_filename));
             $photo->filename = $request->image_filename;
         }
 
@@ -185,5 +197,20 @@ class PhotoController extends Controller
         $photo->location_lat = $request->lat;
         $photo->location_lng = $request->lng;
         $photo->save();
+    }
+
+    /**
+     * @param $filename
+     */
+    private function build_image_path($filename) {
+        return "public/{$this->photo_dir}/{$filename}";
+    }
+
+    /**
+     * @param $filename
+     */
+    private function build_tmp_path($filename) {
+        $tmp_dir = config('app.image_tmp_dir');
+        return "{$tmp_dir}/{$filename}";
     }
 }

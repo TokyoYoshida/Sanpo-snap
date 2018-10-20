@@ -100,7 +100,7 @@ class UserEditController extends Controller
     protected function store($user, Request $request) {
         // update avator image
         if ($request->image_uploaded === "1") {
-            if ($user->icon_file !== null) {
+            if ($user->icon_file !== null) { // remove old image if exist
                 Storage::delete($this->build_image_path($user->icon_file));
             }
             $tmp_dir = config('app.image_tmp_dir');
