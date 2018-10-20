@@ -149,5 +149,6 @@ return [
         'lat' => '場所',
         'comment' => "コメント",
         'image_filename' => "画像",
+        'file' => "画像",
     ],
 ];

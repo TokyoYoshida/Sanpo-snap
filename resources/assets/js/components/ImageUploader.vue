@@ -11,8 +11,17 @@
             v-on:vdropzone-removed-file="onRemoved"
         >
         </vue-dropzone>
+
         <input type="hidden" name="image_filename" class="form-control" :value="filename">
         <input type="hidden" name="image_uploaded" class="form-control" :value="uploaded">
+
+        <div class="alert alert-danger" v-if="errors">
+            <ul>
+                <li v-for="(error, index) in errors">
+                    {{ error }}
+                </li>
+            </ul>
+        </div>
     </div>
 </template>
 
@@ -28,10 +37,6 @@
     #dropzone .dz-preview .dz-image {
         display: flex;
         justify-content: center;
-    }
-    #dropzone img {
-        width: auto !important;
-        height: auto !important;
     }
 </style>
 
@@ -68,9 +73,10 @@
                 filename: '',
                 uploaded: 0,
                 file: null,
+                errors: null,
                 dropzoneOptions: {
                     url: '/api/image',
-                    maxFilesize: 2,
+                    maxFilesize: 20,
                     headers: { 'X-CSRF-TOKEN': document.head.querySelector('meta[name="csrf-token"]').content},
                     maxFiles: 1,
                     clickable: true,
@@ -88,15 +94,18 @@
             onError: function (file, message, xhr){
                 this.file = file;
                 this.filename = "";
+                this.errors = message.errors.file;
             },
             onSuccess: function (file,response) {
                 this.filename = response;
                 this.file = file;
                 this.uploaded = 1;
+                this.errors = "";
             },
             onRemoved: function (file, error, xhr){
                 this.filename = "";
                 this.uploaded = 0;
+                this.errors = "";
             }
         }
     }

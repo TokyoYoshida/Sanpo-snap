@@ -29,7 +29,7 @@
                 <div class="card border-0">
                     <div class="card-header border-0">{{ __('写真') }}</div>
                     <div class="card-body text-center">
-                        <img src="/storage/photo/{{ $photo->filename  }}">
+                        <img src="/storage/photo/{{ $photo->filename  }}" class="preview-img">
                         <fav-panel
                             :default-is-faved={{ json_encode($is_faved) }}
                             :user-id="{{ $auth_user ? $auth_user->id : json_encode(null)}}"
