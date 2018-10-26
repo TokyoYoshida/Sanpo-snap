@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+    <div id="dialog-msg" style="display:none;">
+        <p>削除しますか？</p>
+    </div>
     <div class="container photo-edit">
         <form method="POST" action="{{ $photo ? url("photos/edit/update") : url('/photos') }}" aria-label="{{ __('Register') }}">
         <div class="row justify-content-center">
@@ -67,7 +70,7 @@
                                 <label for="comment" class="col-md-4 col-form-label text-md-right">{{ __('コメント') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="comment" type="comment" class="form-control{{ $errors->has('comment') ? ' is-invalid' : '' }}" name="comment" value="{{ old('comment', $photo ? $photo->comment : '') }}">
+                                    <input id="comment" type="text" class="form-control{{ $errors->has('comment') ? ' is-invalid' : '' }}" name="comment" value="{{ old('comment', $photo ? $photo->comment : '') }}">
 
                                     @if ($errors->has('comment'))
                                         <span class="invalid-feedback" role="alert">
@@ -77,6 +80,19 @@
                                 </div>
                             </div>
 
+                        <div class="form-group row">
+                            <label for="sanpo_date" class="col-md-4 col-form-label text-md-right">{{ __('散歩した日') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="sanpo_date" type="date" class="form-control{{ $errors->has('sanpo_date') ? ' is-invalid' : '' }}" name="sanpo_date" value="{{ old('sanpo_date', $photo ? $photo->sanpo_date : '') }}">
+
+                                @if ($errors->has('sanpo_date'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('sanpo_date') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -96,15 +112,29 @@
                     </div>
                 </div>
             </div>
-        <div class="form-group row justify-content-center">
-            <div class="col-md-12">
-                <div class="card border-0">
-                    <button type="submit" class="btn btn-primary">
-                        {{ __('保存') }}
-                    </button>
+            <div class="form-group row justify-content-center">
+                <div class="col-md-12">
+                    <div class="card border-0">
+                        <button type="submit" class="btn btn-primary" id="delete-button">
+                            {{ __('保存') }}
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
         </form>
+        @if ($photo)
+        <form method="POST" action="{{ route('photo_delete', $photo->id) }}" aria-label="{{ __('Delete') }}" class="confirm-form">
+            @csrf
+            <div class="form-group row justify-content-center">
+                <div class="col-md-12">
+                    <div class="card border-0">
+                        <button type="submit" class="btn btn-danger" id="qqdelete-button">
+                            {{ __('写真を削除する') }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        @endif
     </div>
 @endsection

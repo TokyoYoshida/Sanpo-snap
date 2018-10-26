@@ -3,12 +3,12 @@
         <div class="col-md-2　d-flex align-items-center">
             <img :src="iconUrl" alt="avatar" class="rounded-circle icon"/>
         </div>
-        <div class="col-md-6 d-flex align-items-center">
+        <div class="col-md-5 d-flex align-items-center">
             <a :href="'/users/' + id" class="ml-2">
                 {{ name }}さん
             </a>
         </div>
-        <div class="col-md-4 d-flex align-items-center">
+        <div class="col-md-5 d-flex align-items-center">
             <follow-button
                 :default-is-following="isFollowing"
                 :user-id="id"

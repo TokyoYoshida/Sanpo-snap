@@ -36,15 +36,10 @@ class ApiImageController extends Controller
     protected function validator(array $data) {
         $validator = Validator::make($data, [
             'file' => [
-                // 必須
                 'required',
-                // アップロードされたファイルであること
                 'file',
-                // 画像ファイルであること
                 'image',
-                // MIMEタイプを指定
-                'mimes:jpeg',
-                // 最小縦横120px 最大縦横400px
+                'mimes:jpeg,png',
                 'dimensions:min_width=100,min_height=100,max_width=5000,max_height=5000',
             ]
         ]);
