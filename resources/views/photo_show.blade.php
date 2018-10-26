@@ -80,6 +80,13 @@
                                 </div>
                             </div>
 
+                        <div class="form-group row">
+                            <label for="sanpo_date" class="col-md-4 col-form-label text-md-right">{{ __('散歩した日') }}</label>
+
+                            <div class="col-md-6 d-flex align-items-center">
+                                {{ $photo->sanpo_date !== null ? $photo->sanpo_date->format('Y年m月d日') : '' }}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -100,6 +107,21 @@
                 </div>
             </div>
         </form>
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <div class="card border-0">
+                    <div class="card-header border-0">{{ __('コメント') }}</div>
+
+                    <div class="card-body">
+                        <comment-panel
+                            photo-id="{{ $photo->id }}"
+                            :auth-user-id="{{ Auth::user() ? Auth::user()->id : json_encode(null) }}"
+                        >
+                        </comment-panel>
+                    </div>
+                </div>
+            </div>
+        </div>
         @if (($photo_user && Auth::user()) ? Auth::user()->id == $photo_user->id : false)
         <div class="row justify-content-center">
             <div class="col-md-12">

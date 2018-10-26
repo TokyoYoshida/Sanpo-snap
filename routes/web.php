@@ -28,8 +28,9 @@ Route::post('/users/password_change', 'PasswordChangeController@update')->name('
 Route::get('/users/{id}', 'UserEditController@show')->name('user_show');
 Route::get('/users/{id}/follows', 'FollowController@follows')->name('follows_show');
 Route::get('/users/{id}/followers', 'FollowController@follower')->name('follower_show');
+Route::post('/photos/{id}/delete', 'PhotoController@destroy')->name('photo_delete');
 Route::get('/photos/create', 'PhotoController@create')->name('photo_create');
-Route::post('/photos', 'PhotoController@store')->name('photo_store');
 Route::get('/photos/edit/{id}', 'PhotoController@edit')->name('photo_edit');
 Route::post('/photos/edit/update', 'PhotoController@update')->name('photo_update');
 Route::get('/photos/{id}', 'PhotoController@show')->name('photo_show');
+Route::post('/photos', 'PhotoController@store')->name('photo_store');

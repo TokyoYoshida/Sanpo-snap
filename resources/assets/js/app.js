@@ -42,8 +42,37 @@ Vue.component('follow-panel', require('./components/FollowPanel.vue'));
 Vue.component('fav-panel', require('./components/FavPanel.vue'));
 Vue.component('user-panel', require('./components/UserPanel.vue'));
 Vue.component('home-panel', require('./components/HomePanel.vue'));
+Vue.component('comment-panel', require('./components/CommentPanel.vue'));
 
 new Vue({
     el: '#app'
 });
 
+// jquery
+
+import 'jquery-ui/ui/widgets/dialog.js';
+
+$(function() {
+    $(".confirm-form").on('submit', function(e, context) {
+        var form=$(this);
+        if ($(this).attr('gate') == 'open'){
+            $(this).attr('gate','close');
+            return true;
+        }
+        e.preventDefault();
+        $("#dialog-msg").dialog({
+            modal:true, //モーダル表示
+            title:"確認", //タイトル
+            buttons: { //ボタン
+                "確認": function() {
+                    $(this).dialog("close");
+                    form.attr("gate","open");
+                    form.submit();
+                },
+                "キャンセル": function() {
+                    $(this).dialog("close");
+                }
+            }
+        });
+    });
+});
