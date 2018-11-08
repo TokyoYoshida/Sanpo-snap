@@ -36,7 +36,7 @@ Vue.component(
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 Vue.component('file-simple-uploader', require('./components/FileUploader.vue'));
 Vue.component('photo-gallery', require('./components/PhotoGallery.vue'));
-Vue.component('image-uploader', require('./components/ImageUpLoader.vue'));
+Vue.component('image-uploader', require('./components/ImageUploader.vue'));
 Vue.component('map-pointer', require('./components/MapPointer.vue'));
 Vue.component('follow-panel', require('./components/FollowPanel.vue'));
 Vue.component('fav-panel', require('./components/FavPanel.vue'));
