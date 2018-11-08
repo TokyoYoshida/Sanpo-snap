@@ -20,11 +20,10 @@ class ApiImageController extends Controller
 
         $filepath = $request->file->store(config('app.image_tmp_dir'));
 
-        $basename = basename($filepath);
-        $image_filename = base_path() . "/public/storage/tmp/{$basename}";
+        $image_filename = storage_path() . "/app/{$filepath}";
         Image::stripImage($image_filename, $image_filename);
 
-        return response($basename);
+        return response(basename($filepath));
     }
 
     /**
