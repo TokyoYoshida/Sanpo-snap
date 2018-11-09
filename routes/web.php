@@ -11,12 +11,16 @@
 |
 */
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
+Route::middleware('verified')->group(function() {
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/photos/create', 'PhotoController@create')->name('photo_create');
+    Route::get('/photos/edit/{id}', 'PhotoController@edit')->name('photo_edit');
+});
 Route::get('/login/{provider}',          'Auth\SocialAccountController@redirectToProvider');
 Route::get('/login/{provider}/callback', 'Auth\SocialAccountController@handleProviderCallback');
 Route::get('/', 'TopController@index')->name('top');
-Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/users/resign', 'ResignController@show')->name('resign_show');
 Route::post('/users/resign', 'ResignController@update')->name('resign_update');
 Route::get('/users/resign_complete', 'ResignController@complete')->name('resign_complete_show');
@@ -29,8 +33,6 @@ Route::get('/users/{id}', 'UserEditController@show')->name('user_show');
 Route::get('/users/{id}/follows', 'FollowController@follows')->name('follows_show');
 Route::get('/users/{id}/followers', 'FollowController@follower')->name('follower_show');
 Route::post('/photos/{id}/delete', 'PhotoController@destroy')->name('photo_delete');
-Route::get('/photos/create', 'PhotoController@create')->name('photo_create');
-Route::get('/photos/edit/{id}', 'PhotoController@edit')->name('photo_edit');
 Route::post('/photos/edit/update', 'PhotoController@update')->name('photo_update');
 Route::get('/photos/{id}', 'PhotoController@show')->name('photo_show');
 Route::post('/photos', 'PhotoController@store')->name('photo_store');
