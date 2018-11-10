@@ -18,6 +18,7 @@
                             <div class="card-body">
                                 <photo-gallery
                                     :reflesh-toggle=onClickToggle
+                                    :per-page=30
                                 >
                                 </photo-gallery>
                             </div>
@@ -36,6 +37,7 @@
                                     type="3"
                                     :user_id=user_id
                                     :refresh-toggle=onClickToggle
+                                    :per-page=30
                                 >
                                 </photo-gallery>
                             </div>

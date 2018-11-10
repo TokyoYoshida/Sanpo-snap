@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div>
-        <photo-gallery></photo-gallery>
+        <photo-gallery :per-page=30></photo-gallery>
     </div>
 </div>
 @endsection

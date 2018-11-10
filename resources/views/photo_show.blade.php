@@ -56,7 +56,7 @@
                                     <user-panel
                                         :id="{{$photo_user->id}}"
                                         name="{{$photo_user->name}}"
-                                        icon-url="{{ asset("storage/avatar/{$photo_user->icon_file}") }}"
+                                        icon-url="{{ $photo_user->icon_file ? asset("storage/avatar/{$photo_user->icon_file}") : '' }}"
                                         :is-following={{ json_encode($is_following != null)}}
                                         :button-type={{ ($auth_user == null || $auth_user->id == $photo_user->id) ? 0 : ($is_following != null ?  2 : 1)}}
                                     >
