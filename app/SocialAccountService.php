@@ -23,6 +23,7 @@ class SocialAccountService
                     'email' => $providerUser->getEmail(),
                     'name' => $providerUser->getName() ?: $providerUser->getNickname(),
                 ]);
+                $user->sendEmailVerificationNotification();
             }
 
             $user->accounts()->create([

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Photo;
 use App\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Http\Request;
 
 class ApiPhotoController extends Controller
 {
@@ -13,8 +15,11 @@ class ApiPhotoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
-        return response(Photo::all());
+    public function index(Request $request) {
+        $offset = $request->query("offset");
+        $per_page = $request->query("per_page");
+
+        return response(Photo::skip($offset)->take($per_page)->get());
     }
 
     /**
@@ -41,8 +46,6 @@ class ApiPhotoController extends Controller
         if ($comments === null) {
             abort(404);
         }
-
-        \Log::debug('log test', [$comments]);
 
         return $comments;
     }
