@@ -22,4 +22,16 @@ class Image
         $img->stripImage();
         $img->writeImage($save_filename);
     }
+
+    /**
+     * adjustment iPhone photo rotation and save
+     *
+     * @param $load_filename
+     * @param $save_filename
+     */
+    static public function adjustRotate($load_filename, $save_filename){
+        $img= new \Imagick($load_filename);
+        $img->autoOrient();
+        $img->writeImage($save_filename);
+    }
 }
