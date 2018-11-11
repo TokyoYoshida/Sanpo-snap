@@ -54,14 +54,8 @@
             if(this.defaultFilename !== "") {
                 this.file = {size: 123, name: "Icon", type: "image/png"};
                 this.filename = this.defaultFilename;
-                var url;
-                if(this.imageUploaded === "1") {
-                    url = "/storage/tmp/" + this.defaultFilename;
-                } else {
-                    url = this.imageDir + this.defaultFilename;
-                }
 
-                this.$refs.myVueDropzone.manuallyAddFile(this.file, url);
+                this.$refs.myVueDropzone.manuallyAddFile(this.file, this.getUrl(this.filename));
             }
             this.uploaded = this.imageUploaded;
         },
@@ -86,6 +80,12 @@
             }
         },
         methods: {
+            getUrl: function(filename) {
+                if(this.imageUploaded === "1") {
+                    return "/storage/tmp/" + this.defaultFilename;
+                }
+                return this.imageDir + this.defaultFilename;
+            },
             onFilesAdded: function (file) {
                 if(this.file) {
                     this.$refs.myVueDropzone.removeFile(this.file);
@@ -97,10 +97,13 @@
                 this.errors = message.errors.file;
             },
             onSuccess: function (file,response) {
+                this.$refs.myVueDropzone.removeAllFiles();
                 this.filename = response;
                 this.file = file;
                 this.uploaded = 1;
                 this.errors = "";
+                this.file = {size: 123, name: "Icon", type: "image/png"};
+                this.$refs.myVueDropzone.manuallyAddFile(this.file, this.getUrl(this.filename));
             },
             onRemoved: function (file, error, xhr){
                 this.filename = "";

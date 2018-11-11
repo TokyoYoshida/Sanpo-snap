@@ -21,6 +21,7 @@ class ApiImageController extends Controller
         $filepath = $request->file->store(config('app.image_tmp_dir'));
 
         $image_filename = storage_path() . "/app/{$filepath}";
+        Image::adjustRotate($image_filename, $image_filename);
         Image::stripImage($image_filename, $image_filename);
 
         return response(basename($filepath));
