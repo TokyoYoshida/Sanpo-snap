@@ -102,8 +102,8 @@
                 this.file = file;
                 this.uploaded = 1;
                 this.errors = "";
-                this.file = {size: 123, name: "Icon", type: "image/png"};
-                this.$refs.myVueDropzone.manuallyAddFile(this.file, this.getUrl(this.filename));
+                let url = "/storage/tmp/" + this.filename;
+                this.$refs.myVueDropzone.manuallyAddFile(this.file, url);
             },
             onRemoved: function (file, error, xhr){
                 this.filename = "";
