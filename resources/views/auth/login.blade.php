@@ -75,5 +75,20 @@
             </a>
         </div>
     </div>
+    <div class="row justify-content-center mt-3">
+        <div class="col-md-8">
+            <p>
+                ご利用の際は、散歩Snapの
+                <a href="/html/terms_of_service.html" target="_blank" rel="noopener">
+                    利用規約
+                </a>
+                および
+                <a href="/html/privacy.html" target="_blank" rel="noopener">
+                    プライバシーポリシー
+                </a>
+                に同意するものとします。
+            </p>
+        </div>
+    </div>
 </div>
 @endsection

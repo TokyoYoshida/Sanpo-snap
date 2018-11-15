@@ -39,6 +39,9 @@
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
+                                <a class="nav-link" href="/html/information.html" target="_blank" rel="noopener">{{ __('お問い合わせ') }}</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('ログイン') }}</a>
                             </li>
                             <li class="nav-item">
@@ -59,6 +62,7 @@
                                                      document.getElementById('profile-form').submit();">
                                         {{ __('プロフィール編集') }}
                                     </a>
+                                    <a class="dropdown-item" href="/html/information.html" target="_blank" rel="noopener">{{ __('お問い合わせ') }}</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
