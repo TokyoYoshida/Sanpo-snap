@@ -39,6 +39,7 @@
                             :add-remove-link=false
                         >
                         </image-uploader>
+                        <p class="form-text text-muted">※風景写真を対象にしています。人が写っている写真はアップロードしないでください。</p>
                     </div>
                 </div>
             </div>
