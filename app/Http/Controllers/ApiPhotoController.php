@@ -19,7 +19,7 @@ class ApiPhotoController extends Controller
         $offset = $request->query("offset");
         $per_page = $request->query("per_page");
 
-        return response(Photo::skip($offset)->take($per_page)->get());
+        return response(Photo::orderBy('created_at', 'desc')->skip($offset)->take($per_page)->get());
     }
 
     /**
