@@ -16,10 +16,13 @@ class ApiUserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function photos($id)
+    public function photos($id, Request $request)
     {
+        $offset = $request->query("offset");
+        $per_page = $request->query("per_page");
+
         $user = User::find($id);
-        $photos = $user->photos()->get();
+        $photos = $user->photos()->skip($offset)->take($per_page)->get();
         return response($photos);
     }
     /**
@@ -27,10 +30,13 @@ class ApiUserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function favs($id)
+    public function favs($id, Request $request)
     {
+        $offset = $request->query("offset");
+        $per_page = $request->query("per_page");
+
         $user = User::find($id);
-        $favs = $user->favs()->with('photo')->get();
+        $favs = $user->favs()->with('photo')->skip($offset)->take($per_page)->get();
 
         $photos = [];
         foreach ($favs as $fav) {
@@ -45,14 +51,18 @@ class ApiUserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function timeline($id)
+    public function timeline($id, Request $request)
     {
+        $offset = $request->query("offset");
+        $per_page = $request->query("per_page");
+
         $photos = DB::table('follows')
             ->select('photos.*')
             ->join('photos', 'follows.followee_id', '=', 'photos.user_id')
             ->where('follows.follower_id', '=', $id)
             ->orderBy('photos.created_at', 'desc')
-            ->take(10)
+            ->skip($offset)
+            ->take($per_page)
             ->get();
 
         return response($photos);

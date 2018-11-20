@@ -12,7 +12,9 @@
                             <label for="icon" class="col-md-4 col-form-label text-md-right">{{ __('アイコン') }}</label>
 
                             <div class="col-md-6">
+                                @if ($user->icon_file)
                                 <img src="{{ asset("storage/avatar/{$user->icon_file}") }}" alt="avatar" />
+                                @endif
                             </div>
                         </div>
 
@@ -72,7 +74,7 @@
                 <div class="card">
                     <div class="card-header">{{ __('Photo') }}</div>
                     <div class="card-body">
-                        <photo-gallery type="1" user_id="{{ $user->id }}"></photo-gallery>
+                        <photo-gallery type="1" user_id="{{ $user->id }}" :per-page=30></photo-gallery>
                     </div>
                 </div>
             </div>
@@ -82,7 +84,7 @@
                 <div class="card">
                     <div class="card-header">{{ __('Fav') }}</div>
                     <div class="card-body">
-                        <photo-gallery type="2" user_id="{{ $user->id }}"></photo-gallery>
+                        <photo-gallery type="2" user_id="{{ $user->id }}" :per-page=30></photo-gallery>
                     </div>
                 </div>
             </div>
