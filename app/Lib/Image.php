@@ -19,6 +19,7 @@ class Image
      */
     static public function stripImage($load_filename, $save_filename) {
         $img = new \Imagick($load_filename);
+        $img->setImageCompressionQuality(70);
         $img->stripImage();
         $img->writeImage($save_filename);
     }
