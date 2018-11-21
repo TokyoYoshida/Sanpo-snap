@@ -13,7 +13,7 @@
 
                             <div class="col-md-6">
                                 @if ($user->icon_file)
-                                <img src="{{ asset("storage/avatar/{$user->icon_file}") }}" alt="avatar" />
+                                <img src="{{ asset("storage/avatar/{$user->icon_file}") }}" alt="avatar" class="mw-100" />
                                 @endif
                             </div>
                         </div>
