@@ -11,7 +11,7 @@
             >
             <div v-masonry-tile class="item" v-for="(item, index) in blocks">
                 <a :href="'/photos/' + item.id">
-                    <img :src="'/storage/photo/' + item.filename">
+                    <img :src="'/storage/photo/' + item.filename +'?thumb'">
                 </a>
             </div>
         </div>
