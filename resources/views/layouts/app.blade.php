@@ -16,6 +16,9 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <!-- Service Worker/PWA -->
+    <link rel="manifest" href="/manifest.json">
 </head>
 <body>
     <div id="app">
