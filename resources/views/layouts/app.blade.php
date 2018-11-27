@@ -19,6 +19,9 @@
 
     <!-- Service Worker/PWA -->
     <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/launcher-icon-4x.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
 </head>
 <body>
     <div id="app">
