@@ -25,6 +25,7 @@ required:
 
     git clone [https://github.com/TokyoYoshida/Sanpo-snap](https://github.com/TokyoYoshida/Sanpo-snap)
     cd Sanpo-snap
+    cp .env.example .env
     composer install
     npm install
     npm run production
@@ -40,4 +41,4 @@ MIT
 
 ## Contact
 
-yoshidaforpublic@gmail.com
+yoshidaforpublic@gmail.com  
