@@ -41,12 +41,16 @@ Vue.component('map-pointer', require('./components/MapPointer.vue'));
 Vue.component('follow-panel', require('./components/FollowPanel.vue'));
 Vue.component('fav-panel', require('./components/FavPanel.vue'));
 Vue.component('user-panel', require('./components/UserPanel.vue'));
-Vue.component('home-panel', require('./components/HomePanel.vue'));
+Vue.component('home-panel', require('./views/HomePanel.vue'));
 Vue.component('comment-panel', require('./components/CommentPanel.vue'));
 
-new Vue({
-    el: '#app'
-});
+import router from './router'
+import store from './store'
+
+const app = new Vue({
+    router,
+    store,
+}).$mount('#app');
 
 // service worker
 window.addEventListener('load', () => {

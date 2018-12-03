@@ -1,5 +1,5 @@
 @extends('layouts.base')
 
 @section('container')
-    @yield('content')
+    <router-view></router-view>
 @endsection
