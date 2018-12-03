@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container">
         <ul class="nav nav-tabs">
             <li class="nav-item">
                 <a href="#tab1" class="nav-link" data-toggle="tab" v-on:click="onClick">最新</a>
@@ -54,6 +54,9 @@
 
 <script>
     export default {
+        mounted() {
+            console.log('home Component mounted.')
+        },
         props: {
             user_id: String,
         },

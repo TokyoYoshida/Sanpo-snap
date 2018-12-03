@@ -1,6 +1,6 @@
 # Sanpo Snap
 
-Sanpo-snap is a service to share photos of walks.
+[Sanpo-snap](https://sanpo-snap.net/) is a service to share photos of walks.
 
 This service is implemented using Laravel and can also be used as a template when you create a new service.
 
