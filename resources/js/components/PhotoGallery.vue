@@ -35,7 +35,7 @@
     export default {
         props: {
             type: String, // 0 or undefined = all, 1 = user owned photos, 2 = user fav photos, 3 = timeline
-            user_id: String,
+            user_id: Number,
             refreshToggle: Boolean, // Refresh if there is a change regardless of the value
             perPage: Number
         },

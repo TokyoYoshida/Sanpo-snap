@@ -14,7 +14,10 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">最新の散歩</div>
-
+                            <button class="btn btn-primary" type="button" @click="add()">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            {{auth_user_id}}
                             <div class="card-body">
                                 <photo-gallery
                                     :reflesh-toggle=onClickToggle
@@ -33,9 +36,11 @@
                             <div class="card-header">フォローしている散歩</div>
 
                             <div class="card-body">
+                                <div v-if="loading">loading...</div>
                                 <photo-gallery
+                                    v-if="!loading"
                                     type="3"
-                                    :user_id=user_id
+                                    :user_id=authUser.id
                                     :refresh-toggle=onClickToggle
                                     :per-page=30
                                 >
@@ -53,21 +58,30 @@
 </style>
 
 <script>
+    import { mapActions } from 'vuex';
+    import { mapState } from 'vuex';
+
     export default {
-        mounted() {
-            console.log('home Component mounted.')
-        },
-        props: {
-            user_id: String,
-        },
         data: function() {
             return {
-                onClickToggle: false
+                onClickToggle: false,
+                auth_user_id: null,
             }
         },
         methods: {
             onClick: function (e) {
                 this.onClickToggle = !this.onClickToggle;
+            },
+            ...mapActions({
+                getUserInfo: 'getUserInfo',
+                add: 'increment',
+                searchSong: 'searchSong'
+            })
+        },
+        computed: {
+            ...mapState(['loading','authUser']),
+            count() {
+                return this.$store.state.count
             }
         }
     }

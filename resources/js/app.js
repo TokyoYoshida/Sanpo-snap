@@ -50,6 +50,9 @@ import store from './store'
 const app = new Vue({
     router,
     store,
+    created() {
+        this.$store.dispatch('getUserInfo');
+    },
 }).$mount('#app');
 
 // service worker
