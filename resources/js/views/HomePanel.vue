@@ -14,10 +14,6 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">最新の散歩</div>
-                            <button class="btn btn-primary" type="button" @click="add()">
-                                <i class="fa fa-search"></i>
-                            </button>
-                            {{auth_user_id}}
                             <div class="card-body">
                                 <photo-gallery
                                     :reflesh-toggle=onClickToggle

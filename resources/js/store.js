@@ -8,13 +8,13 @@ Vue.use(Vuex);
 const debug = process.env.NODE_ENV !== 'production';
 const GET_USER_INFO = 'GET_USER_INFO';
 const SET_LOADING = 'SET_LOADING';
+const SET_CURRENT_PHOTO = 'SET_CURRENT_PHOTO';
 
 export default new Vuex.Store({
     state: {
         loading: false,
-        authUser: {
-            id: null,
-        },
+        authUser: null,
+        currentPhoto: null,
         count: 100 + 100,
         search_result: {
             tracks: {
@@ -31,8 +31,12 @@ export default new Vuex.Store({
     mutations: {
         [GET_USER_INFO](state, authUser) {
             state.authUser = authUser;
-        }, [SET_LOADING](state, loading) {
+        },
+        [SET_LOADING](state, loading) {
             state.loading = loading;
+        },
+        [SET_CURRENT_PHOTO](state, photo) {
+            state.currentPhoto = photo;
         },
         increment(state) {
             state.count++
@@ -49,6 +53,12 @@ export default new Vuex.Store({
                     context.commit(GET_USER_INFO, response.data);
                     context.commit(SET_LOADING, false);
                 });
+        },
+        getCurrentPhoto(context, id) {
+            axios("/api/photos/" + id, {
+            }).then(response => {
+                context.commit(SET_CURRENT_PHOTO, response.data);
+            });
         },
         increment(context) {
             context.commit('increment')

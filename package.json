@@ -26,6 +26,7 @@
     },
     "dependencies": {
         "bootstrap-vue": "^2.0.0-rc.11",
+        "moment": "^2.22.2",
         "rupture": "^0.7.1",
         "vue-infinite-scroll": "^2.0.2",
         "vue-masonry": "^0.11.6",

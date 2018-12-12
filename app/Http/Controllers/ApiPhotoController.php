@@ -23,6 +23,32 @@ class ApiPhotoController extends Controller
     }
 
     /**
+     * return a photo
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function get($id, Request $request) {
+        $auth_user = User::find(auth()->id());
+        $photo = Photo::find($id);
+        $photo_user = $photo->user()->first();
+        if($photo === null){
+            abort(404);
+        }
+        $is_faved = false;
+        $is_following = false;
+        if($auth_user !== null) {
+        $is_faved = $auth_user->favs()->where('photo_id', $photo->id)->first() != null;
+        $is_following = $photo_user->followers->where('follower_id', $auth_user->id)->first() !== null;
+}
+
+        return response([
+            'photo' => $photo,
+            'photo_user' => $photo_user,
+            'is_faved' => $is_faved,
+            'is_following' => $is_following
+        ]);
+    }
+    /**
      * return a comment
      *
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response

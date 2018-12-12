@@ -13,10 +13,11 @@
 
 Auth::routes(['verify' => true]);
 
+Route::get('/vue/{vue_capture?}', function () {
+    return view('layouts.vue');
+})->where('vue_capture', '[\/\w\.-]*');
+
 Route::middleware('verified')->group(function() {
-    Route::get('/vue/{vue_capture?}', function () {
-        return view('layouts.vue');
-    })->where('vue_capture', '[\/\w\.-]*');
     Route::get('/photos/create', 'PhotoController@create')->name('photo_create');
     Route::get('/photos/edit/{id}', 'PhotoController@edit')->name('photo_edit');
     Route::post('/photos/{id}/delete', 'PhotoController@destroy')->name('photo_delete');
