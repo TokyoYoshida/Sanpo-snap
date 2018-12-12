@@ -10,7 +10,10 @@
              infinite-scroll-distance="10"
             >
             <div v-masonry-tile class="item" v-for="(item, index) in blocks">
-                <a :href="'/photos/' + item.id">
+                <router-link :to="'/vue/photos/'+item.id" v-if="isSpa">
+                    <img :src="'/storage/photo/' + item.filename +'?thumb'">
+                </router-link>
+                <a :href="'/photos/' + item.id" v-if="!isSpa">
                     <img :src="'/storage/photo/' + item.filename +'?thumb'">
                 </a>
             </div>
@@ -33,6 +36,10 @@
     Vue.use(InfiniteScroll);
 
     export default {
+        mounted() {
+            console.log(this.$route);
+            console.log(this.isSpa);
+        },
         props: {
             type: String, // 0 or undefined = all, 1 = user owned photos, 2 = user fav photos, 3 = timeline
             user_id: Number,
@@ -74,6 +81,11 @@
                         this.offset += this.perPage;
                         this.busy = false;
                     });
+            },
+        },
+        computed: {
+            isSpa: function () {
+                return this.$route.path.match(/^\/vue\/.*/) !== null;
             }
         }
     }

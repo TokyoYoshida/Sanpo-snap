@@ -18,6 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/photos', 'ApiPhotoController@index')->name('photo_index');
+Route::get('/photos/{id}', 'ApiPhotoController@get')->name('photo_get');
 Route::get('/photos/{id}/comments', 'ApiPhotoController@comments')->name('photo_comments');
 Route::get('/users/{id}/photos', 'ApiUserController@photos')->name('user_photos');
 Route::get('/users/{id}/favs', 'ApiUserController@favs')->name('user_favs');

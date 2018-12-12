@@ -46,6 +46,14 @@ Vue.component('comment-panel', require('./components/CommentPanel.vue'));
 
 import router from './router'
 import store from './store'
+import moment from 'moment';
+
+Vue.filter('formatdate', function (value) {
+    if(!value ){
+        return null;
+    }
+    return moment(value).format('M月D日');
+})
 
 const app = new Vue({
     router,

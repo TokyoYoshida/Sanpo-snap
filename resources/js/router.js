@@ -9,6 +9,10 @@ const routes = [
         component: require('./views/HomePanel.vue')
     },
     {
+        path: '/vue/photos/:id',
+        component: require('./views/PhotoShow.vue')
+    },
+    {
       path: '/products',
         component: require('./components/ExampleComponent.vue')
     },
