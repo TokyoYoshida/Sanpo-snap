@@ -11,6 +11,14 @@ use Illuminate\Support\Facades\DB;
 
 class ApiUserController extends Controller
 {
+    public function me(Request $request) {
+        $user = User::find(auth()->id());
+        if($user === null){
+            abort(404);
+        }
+
+        return response($user);
+    }
     /**
      * Display a listing of the resource.
      *

@@ -22,6 +22,7 @@ Route::get('/photos/{id}/comments', 'ApiPhotoController@comments')->name('photo_
 Route::get('/users/{id}/photos', 'ApiUserController@photos')->name('user_photos');
 Route::get('/users/{id}/favs', 'ApiUserController@favs')->name('user_favs');
 Route::get('/users/{id}/timeline', 'ApiUserController@timeline')->name('user_timeline');
+Route::get('/users/me', 'ApiUserController@me')->name('user_me');
 
 Route::post('/image', 'ApiImageController@imageUpload')->name('image_upload');
 

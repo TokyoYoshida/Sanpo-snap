@@ -3,47 +3,63 @@ import Vuex from 'vuex'
 import router from './router'
 import store from './store'
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
-const debug = process.env.NODE_ENV !== 'production'
+const debug = process.env.NODE_ENV !== 'production';
+const GET_USER_INFO = 'GET_USER_INFO';
+const SET_LOADING = 'SET_LOADING';
 
 export default new Vuex.Store({
-  state: {
-    count: 0,
-    search_result: {
-      tracks: {
-        items: [
-          {
-            album: {
-              album_type: ''
+    state: {
+        loading: false,
+        authUser: {
+            id: null,
+        },
+        count: 100 + 100,
+        search_result: {
+            tracks: {
+                items: [
+                    {
+                        album: {
+                            album_type: ''
+                        }
+                    }
+                ]
             }
-          }
-        ]
-      }
-    }
-  },
-  mutations: {
-    increment (state) {
-      state.count++
+        }
     },
-    setSearchSongResult(state, result) {
-      state.search_result = result.result
-      console.log(result)
-    }
-  },
-  actions: {
-    increment (context) {
-      context.commit('increment')
+    mutations: {
+        [GET_USER_INFO](state, authUser) {
+            state.authUser = authUser;
+        }, [SET_LOADING](state, loading) {
+            state.loading = loading;
+        },
+        increment(state) {
+            state.count++
+        },
+        setSearchSongResult(state, result) {
+            state.search_result = result.result
+        }
     },
-    searchSong (context, keyword) {
-      console.log("keyword")
-      console.log(keyword)
-      axios
-      .get('http://127.0.0.1:8000/api/test?keyword=' + keyword)
-      .then(response => (
-        context.commit('setSearchSongResult', response.data)
-        )
-      )
+    actions: {
+        getUserInfo(context) {
+            context.commit(SET_LOADING, true);
+            axios.get('/api/users/me')
+                .then(response => {
+                    context.commit(GET_USER_INFO, response.data);
+                    context.commit(SET_LOADING, false);
+                });
+        },
+        increment(context) {
+            context.commit('increment')
+        },
+        searchSong(context, keyword) {
+            axios
+                .get('http://127.0.0.1:8000/api/test?keyword=' + keyword)
+                .then(response => (
+                        context.commit('setSearchSongResult', response.data)
+                    )
+                )
+        }
     }
-  }
 })

@@ -74,7 +74,7 @@
                 <div class="card">
                     <div class="card-header">{{ __('Photo') }}</div>
                     <div class="card-body">
-                        <photo-gallery type="1" user_id="{{ $user->id }}" :per-page=30></photo-gallery>
+                        <photo-gallery type="1" :user_id="{{ $user->id }}" :per-page=30></photo-gallery>
                     </div>
                 </div>
             </div>
@@ -84,7 +84,7 @@
                 <div class="card">
                     <div class="card-header">{{ __('Fav') }}</div>
                     <div class="card-body">
-                        <photo-gallery type="2" user_id="{{ $user->id }}" :per-page=30></photo-gallery>
+                        <photo-gallery type="2" :user_id="{{ $user->id }}" :per-page=30></photo-gallery>
                     </div>
                 </div>
             </div>
