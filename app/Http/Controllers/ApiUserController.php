@@ -30,7 +30,7 @@ class ApiUserController extends Controller
         $per_page = $request->query("per_page");
 
         $user = User::find($id);
-        $photos = $user->photos()->skip($offset)->take($per_page)->get();
+        $photos = $user->photos()->skip($offset)->take($per_page)->orderBy('photos.created_at', 'desc')->get();
         return response($photos);
     }
     /**
@@ -44,12 +44,14 @@ class ApiUserController extends Controller
         $per_page = $request->query("per_page");
 
         $user = User::find($id);
-        $favs = $user->favs()->with('photo')->skip($offset)->take($per_page)->get();
-
-        $photos = [];
-        foreach ($favs as $fav) {
-            $photos[]= $fav->photo;
-        }
+        $photos = DB::table('favs')
+            ->select('photos.*')
+            ->join('photos', 'favs.photo_id', '=', 'photos.id')
+            ->where('favs.user_id', '=', $user->id)
+            ->orderBy('photos.created_at', 'desc')
+            ->skip($offset)
+            ->take($per_page)
+            ->get();
 
         return response($photos);
     }

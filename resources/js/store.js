@@ -55,6 +55,7 @@ export default new Vuex.Store({
                 });
         },
         getCurrentPhoto(context, id) {
+            context.commit(SET_CURRENT_PHOTO, null);
             axios("/api/photos/" + id, {
             }).then(response => {
                 context.commit(SET_CURRENT_PHOTO, response.data);

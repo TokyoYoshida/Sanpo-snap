@@ -38,13 +38,11 @@
             }
         },
         mounted() {
-            console.log(this.authUserId==null);
             axios("/api/photos/" + this.photoId + "/comments", {
                 method: 'get',
                 params: null,
                 withCredentials: true
             }).then(response => {
-                console.log(response.data);
                 this.comments = response.data;
             });
         },

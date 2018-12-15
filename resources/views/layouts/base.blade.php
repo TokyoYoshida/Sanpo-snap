@@ -29,7 +29,7 @@
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
                 @if (Auth::user() && $view_name == "layouts-vue")
-                    <router-link to="/vue/home">{{ config('app.name', 'Laravel') }}</router-link>
+                    <router-link to="/vue/home" class="navbar-brand">{{ config('app.name', 'Laravel') }}</router-link>
                 @else
                     <a class="navbar-brand" href="{{ Auth::user() ? url('/vue/home') : url('/') }}">
                         {{ config('app.name', 'Laravel') }}
