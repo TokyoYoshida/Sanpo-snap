@@ -13,6 +13,9 @@ class TopController extends Controller
      */
     public function index()
     {
+        if(auth()->id() !== null){
+            return redirect('/vue/home');
+        }
         return view('top');
     }
 }

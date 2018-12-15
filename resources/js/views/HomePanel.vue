@@ -2,7 +2,7 @@
     <div class="container">
         <ul class="nav nav-tabs">
             <li class="nav-item">
-                <a href="#tab1" class="nav-link" data-toggle="tab" v-on:click="onClick">最新</a>
+                <a href="#tab1" class="nav-link active" data-toggle="tab" v-on:click="onClick">最新</a>
             </li>
             <li class="nav-item">
                 <a href="#tab2" class="nav-link" data-toggle="tab" v-on:click="onClick">タイムライン</a>

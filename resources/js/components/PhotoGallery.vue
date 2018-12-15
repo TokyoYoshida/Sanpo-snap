@@ -36,10 +36,6 @@
     Vue.use(InfiniteScroll);
 
     export default {
-        mounted() {
-            console.log(this.$route);
-            console.log(this.isSpa);
-        },
         props: {
             type: String, // 0 or undefined = all, 1 = user owned photos, 2 = user fav photos, 3 = timeline
             user_id: Number,

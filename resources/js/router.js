@@ -5,7 +5,7 @@ Vue.use(VueRouter)
 
 const routes = [
     {
-      path: '/vue/home',
+        path: '/vue/home',
         component: require('./views/HomePanel.vue')
     },
     {
@@ -13,17 +13,20 @@ const routes = [
         component: require('./views/PhotoShow.vue')
     },
     {
-      path: '/products',
+        path: '/products',
         component: require('./components/ExampleComponent.vue')
     },
     {
-      path: '/vue/contents',
+        path: '/vue/contents',
         component: require('./components/ExampleComponent.vue')
     }
 ]
 
 export default new VueRouter({
-  mode: 'history',
-  base: __dirname,
-  routes: routes
+    mode: 'history',
+    base: __dirname,
+    routes: routes,
+    scrollBehavior(to, from, savedPosition) {
+        return {x: 0, y: 0}
+    },
 })
