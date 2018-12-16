@@ -72,7 +72,7 @@
                     url: '/api/image',
                     maxFilesize: 20,
                     headers: { 'X-CSRF-TOKEN': document.head.querySelector('meta[name="csrf-token"]').content},
-                    maxFiles: 1,
+                    maxFiles: 3,
                     clickable: true,
                     addRemoveLinks: this.addRemoveLink,
                     thumbnailMethod: 'contain',

@@ -18,7 +18,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card border-0">
-                    <div class="card-header border-0">'写真の情報'</div>
+                    <div class="card-header border-0">写真の情報</div>
 
                     <div class="card-body">
                         <div class="form-group row">
@@ -89,7 +89,7 @@
                 </div>
             </div>
         </div>
-        <div class="row justify-content-center" v-if="authUser">
+        <div class="row justify-content-center" v-if="authUser.id === currentPhoto.photo_user.id">
             <div class="col-md-12">
                 <div class="card border-0">
                     <a class="btn btn-primary" :href="'/photos/edit/'+currentPhoto.photo.id">編集する</a>

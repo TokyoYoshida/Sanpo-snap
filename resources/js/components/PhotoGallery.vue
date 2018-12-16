@@ -56,6 +56,11 @@
         methods: {
             loadMore: function() {
                 let url = '/api/photos';
+                if(this.busy === true){
+                    return;
+                }
+                this.busy = true;
+
                 switch (this.type) {
                     case "1":
                         url = '/api/users/' + this.user_id + '/photos';
@@ -67,9 +72,6 @@
                         url = '/api/users/' + this.user_id + '/timeline';
                         break;
                 }
-
-                this.busy = true;
-
                 axios(url, {
                     params: {offset: this.offset, per_page: this.perPage},
                 }).then(response => {
