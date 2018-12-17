@@ -26,7 +26,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
+        <nav class="navbar navbar-expand-md navbar-light navbar-laravel sticky-top">
             <div class="container">
                 @if (Auth::user() && $view_name == "layouts-vue")
                     <router-link to="/vue/home" class="navbar-brand">{{ config('app.name', 'Laravel') }}</router-link>
