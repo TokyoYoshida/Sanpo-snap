@@ -36,6 +36,9 @@
     Vue.use(InfiniteScroll);
 
     export default {
+        mounted() {
+            console.log('Component mounted.')
+        },
         props: {
             type: String, // 0 or undefined = all, 1 = user owned photos, 2 = user fav photos, 3 = timeline
             user_id: Number,
@@ -78,7 +81,14 @@
                         this.blocks = this.blocks.concat(response.data);
                         this.offset += this.perPage;
                         this.busy = false;
+                        this.preFetch(response.data);
                     });
+            },
+            preFetch: function(data) {
+                data.map(d => {
+                    axios("/api/photos/" + d.id); // Discard results here,But cached in Service Worker.
+                });
+
             },
         },
         computed: {
