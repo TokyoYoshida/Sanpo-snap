@@ -10,22 +10,22 @@ module.exports = {
     clientsClaim: false,
     runtimeCaching: [
         {
-            urlPattern: '/',
+            urlPattern: /^\/(vue\/home){0,1}$/,
             handler: 'networkFirst',
             options: {
                 cacheName: 'page',
                 expiration: {
-                    maxAgeSeconds: 60 * 60 * 24
+                    maxAgeSeconds: 60 * 60
                 }
             }
         },
         {
             urlPattern: /\/api\/.+/,
-            handler: 'networkFirst',
+            handler: 'staleWhileRevalidate',
             options: {
                 cacheName: 'api',
                 expiration: {
-                    maxAgeSeconds: 60 * 60 * 24
+                    maxAgeSeconds: 60 * 60
                 }
             }
         },
