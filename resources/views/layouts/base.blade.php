@@ -23,6 +23,9 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="散歩Snap">
+
+    <!-- Analytics -->
+    @include('layouts/analytics')
 </head>
 <body>
     <div id="app">
